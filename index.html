@@ -1,28 +1,265 @@
-<html>
-<!-- Text between angle brackets is an HTML tag and is not displayed.
-Most tags, such as the HTML and /HTML tags that surround the contents of
-a page, come in pairs; some tags, like HR, for a horizontal rule, stand 
-alone. Comments, such as the text you're reading, are not displayed when
-the Web page is shown. The information between the HEAD and /HEAD tags is 
-not displayed. The information between the BODY and /BODY tags is displayed.-->
+<!doctype html>
+<html lang="de">
 <head>
-<title>Enter a title, displayed at the top of the window.</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#f6f1eb" />
+  <title>Emilie's Kleine Oppepper 🤍</title>
+  <style>
+    :root{
+      --bg:#f6f1eb;
+      --card:#fffdf9;
+      --text:#2f2a27;
+      --muted:#746c66;
+      --border:#ded5cd;
+      --shadow:0 10px 30px rgba(47,42,39,.08);
+    }
+
+    *{box-sizing:border-box}
+
+    body{
+      margin:0;
+      min-height:100vh;
+      display:grid;
+      place-items:center;
+      background:var(--bg);
+      color:var(--text);
+      font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      padding:20px;
+    }
+
+    .wrap{
+      width:min(100%, 520px);
+    }
+
+    .card{
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:28px;
+      padding:28px 22px;
+      box-shadow:var(--shadow);
+    }
+
+    h1{
+      margin:0 0 8px;
+      font-size:clamp(2rem,7vw,3rem);
+      line-height:1.05;
+      letter-spacing:-.03em;
+    }
+
+    .intro{
+      margin:0 0 24px;
+      color:var(--muted);
+      line-height:1.5;
+    }
+
+    .buttons{
+      display:grid;
+      gap:12px;
+    }
+
+    button{
+      width:100%;
+      border:1px solid var(--border);
+      background:#fff;
+      color:var(--text);
+      border-radius:18px;
+      padding:16px 18px;
+      text-align:left;
+      font:inherit;
+      font-weight:700;
+      cursor:pointer;
+      transition:.15s ease;
+      box-shadow:0 4px 12px rgba(47,42,39,.04);
+    }
+
+    button:active{
+      transform:scale(.985);
+    }
+
+    button.secondary{
+      text-align:center;
+      font-weight:650;
+      background:transparent;
+      box-shadow:none;
+    }
+
+    .result{
+      margin-top:20px;
+      padding:22px 18px;
+      border:1px dashed var(--border);
+      border-radius:20px;
+      background:#fff;
+      min-height:150px;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      font-size:1.2rem;
+      line-height:1.55;
+      white-space:pre-line;
+    }
+
+    .result.show{
+      display:flex;
+    }
+
+    .again{
+      margin-top:12px;
+      display:none;
+    }
+
+    .again.show{
+      display:block;
+    }
+
+    .tiny{
+      margin-top:18px;
+      text-align:center;
+      color:var(--muted);
+      font-size:.88rem;
+    }
+  </style>
 </head>
-<!-- The information between the BODY and /BODY tags is displayed.-->
 <body>
-<h1>Enter the main heading, usually the same as the title.</h1>
-<p>Be <b>bold</b> in stating your key points. Put them in a list: </p>
-<ul>
-<li>The first item in your list</li>
-<li>The second item; <i>italicize</i> key words</li>
-</ul>
-<p>Improve your image by including an image. </p>
-<p><img src="http://www.mygifs.com/CoverImage.gif" alt="A Great HTML Resource"></p>
-<p>Add a link to your favorite <a href="https://www.dummies.com/">Web site</a>.
-Break up your page with a horizontal rule or two. </p>
-<hr>
-<p>Finally, link to <a href="page2.html">another page</a> in your own Web site.</p>
-<!-- And add a copyright notice.-->
-<p>© Wiley Publishing, 2011</p>
+  <main class="wrap">
+    <section class="card">
+      <h1>Emilie's Kleine Oppepper 🤍</h1>
+      <p class="intro">Was brauchst du gerade?</p>
+
+      <div class="buttons">
+        <button onclick="pick('nett')">🤍 Ich brauche einen netten Satz</button>
+        <button onclick="randomVideo()">😂 Ich brauche einen Lacher</button>
+        <button onclick="pick('aufmunterung')">🌱 Ich brauche Aufmunterung</button>
+        <button onclick="pick('aufgabe')">🎯 Ich brauche eine Aufgabe</button>
+      </div>
+
+      <div id="result" class="result" aria-live="polite"></div>
+
+      <div id="again" class="again">
+        <button class="secondary" onclick="pick(lastCategory)">Noch einen ✨</button>
+      </div>
+
+      <div class="tiny">Du musst heute nicht alles schaffen.</div>
+    </section>
+  </main>
+
+  <script>
+    const content = {
+      nett: [
+        "Kleiner Reminder: du bist großartig 🤍",
+        "Du machst das mit diesem ganzen *Mensch-sein* wirklich fantastisch!",
+        "Irgendwo sitzt gerade eine Jenny und findet dich toll 👀",
+        "Es gibt Dinge an dir, die du wahrscheinlich für selbstverständlich hältst und die andere Menschen genau deshalb an dir lieben 🤍",
+        "Du gibst die besten Umarmungen!",
+        "Du hast so viele kleine Eigenschaften, die dich unglaublich sympatisch macchen.",
+        "Du bist nicht nur dann toll, wenn du gerade funktionierst 🤍",
+        "Du bist ein absoluter Wohlfühlmensch für Viele🤍",
+        "Du bist erschreckend leicht gernzuhaben",
+        "Du bist eine dieser seltenen Menschen, bei denen die Persönlichkeit das Gesicht noch hübscher macht. Frechheit 🤍",
+        "Du bist wahnsinnig schlau. Zum Glück weißt du das nicht immer, sonst wärst du vermutlich unausstehlich 🤍",
+        "Du bist bist ein Mensch, mit dem man gleichzeitig über die tiefsten Bibelthemen und auch den größten Quatsch reden kann. Elite-Kombination 🤍",
+        "Du bist beneidenswert authentisch. Andere benötigen drei Persönlichkeiten für das, was du mit einer schaffst",
+        "Du bist großartig darin andere Menschen zu verstehen. Jetzt musst du nur noch herausfinden, warum die alle so komisch sind.",
+        "Du bist ein wirklich schöner Mensch. Innen und Außen.🤍",
+        "Deine Persönlichkeit hat unangemessen viele gute Eigenschaften.",
+        "Du bist ein Mensch, den man gerne um sich hat. Sogar freiwillig 🤍",
+        "Du bist so angenehm du selbst, dass man glatt vergisst, wie seltsam Menschen eigentlich sind 🤍",
+        "Du hast einen richtig guten moralischen Kompass. Gut geschult 🤍",
+        "Du bist unglaublich feinfühlig und trotzdem kein emotionales Weichei🤍 Starke Kombination!",
+        "Du bist richtig aufmerksam. Deine Wahrnehmung läuft anscheinend auf Premium.",
+        "Du bist verdammt clever! Nicht nur Weiß-Sachen-Clever sondern Kriegt-Sachen-Zusammen-Clever!",
+        "Du bist absolut charakterstark. Klingt nach Arbeitszeugnis, ist aber ein echtes Kompliment.",
+        "Du bist bemerkenswert widerstandsfähig. Kleine Kakerlaken-Energie, aber hübscher 🤍"
+      ],
+      
+      const videos = [
+        "https://youtube.com/shorts/dioC4sSuJUE?si=QgEXUyr7K2y8EJyQ",
+        "https://youtube.com/shorts/mkN5pblyBoU?si=6BWdjYuWtlBEHWtJ",
+        "https://youtube.com/shorts/j1bP08fooHE?si=0LrWCr4x3K4qxY7G",
+        "https://youtube.com/shorts/2tPLJ1gsLvU?si=TUzT65Kv4M4dT_uf",
+        "https://youtube.com/shorts/BKocnHls9XI?si=ufRX4YQDF3m8MpTW",
+        "https://youtube.com/shorts/N88hXQ4KOOs?si=81vF-3E3kyigbxZg",
+        "https://youtube.com/shorts/yRD7_lbidiw?si=JneMVc9Td2rja1jF",
+        "https://youtube.com/shorts/bWq_NrYpYBw?si=QtAflKtkTEXyu8K8",
+        "https://youtube.com/shorts/40srNzcppX0?si=hEmHu5W5caMDYmkh",
+        "https://youtube.com/shorts/ANvJ9fxbk3s?si=lI4Y0uJ-9iJ1vnhk",
+        "https://youtube.com/shorts/uTns3HT9Luo?si=nBhpgs91byXbLbYW",
+        "https://youtube.com/shorts/OHSHYdt_aik?si=dhTM0sLusqNpswIq",
+        "https://youtube.com/shorts/hkFaAUe3f6s?si=cmVRAreNbo4gbqDI",
+        "https://youtube.com/shorts/igHz4cieohA?si=10f4Zhmli9PzEKMs",
+        "https://youtube.com/shorts/oqLJLpxNZbI?si=LGZs-UHmf3OjDhgT",
+        "https://youtube.com/shorts/qZif_7eAZgo?si=cfM5JdJ_eBuvyGr_"
+      ];
+
+      aufmunterung: [
+        "Du musst nicht den ganzen Weg schaffen. Nur den nächsten kleinen Schritt.",
+        "Ein schlechter Moment ist nicht automatisch ein schlechter Tag.",
+        "Heute darfst du Dinge langsam machen.",
+        "Du darfst dich ausruhen, bevor alles erledigt ist.",
+        "Manchmal ist 'durch den Tag kommen' schon genug.",
+        "Du musst gerade keine Lösung haben.",
+        "Mach die nächste Sache so klein, dass sie fast lächerlich wirkt.",
+        "Es ist okay, wenn heute nur das Nötigste klappt.",
+        "Du bist nicht verpflichtet, dich jetzt sofort besser zu fühlen.",
+        "Vielleicht wird es nicht sofort gut. Aber dieser Moment bleibt nicht für immer genau so.",
+        "Du bist und bleibst einer von Jehovas Lieblingsmenschen. Ein schlechter Tag wird das nicht ändern.",
+        "Denk immer daran, dass Jehova und unzählige Engel für dich jubeln, wenn du weitermachst, obwohl es gerade schwer ist.",
+        "Wenn du deine Mundwinkel zu einem Lächeln formst, produziert dein Körper Glückshormone, obwohl es nur gespielt ist. Verrückt oder? Probiers mal aus!",
+        "Jehova liebt dich für deinen Glauben und für das, was du in all den Jahren für ihn getan hast.",
+        "Ich, dein Gott Jehova, greife nach deiner rechten Hand, ich, der zu dir sagt: ‚Hab keine Angst. Ich werde dir helfen‘ (Jesaja 41:13)",
+        "Denn du wurdest kostbar in meinen Augen und wurdest geehrt, und ich liebe dich. (Jesaja 43:4)",
+        "Denn wenn auch die Berge entfernt und die Hügel erschüttert würden, so wird doch meine loyale Liebe nicht von dir weichen, noch wird mein Friedensbund ins Wanken geraten“, sagt Jehova, der Erbarmen mit dir hat. (Jesaja 54:10)",
+        "Wenn du durch Gewässer ziehst, werde ich bei dir sein. Wenn du Flüsse durchquerst, werden sie dich nicht überfluten. Wenn du durchs Feuer gehst, wird es dich nicht verbrennen, noch wird dich die Flamme ansengen. (Jesaja 43:2)",
+        "Du bist sicher. Jehova ist bei dir :'Ich werde mich hinlegen und friedlich schlafen, denn du allein, Jehova, lässt mich in Sicherheit leben.' (Psalm 4:8)"
+      ],
+
+      aufgabe: [
+        "Finde etwas Grünes und mach ein Foto davon. Mission erfüllt. 🌿",
+        "Hol dir etwas zu trinken. Danach darfst du wieder entscheiden.",
+        "Geh für fünf Minuten vor die Tür oder ans offene Fenster.",
+        "Schick mir ein Emoji ohne Kontext. Wirklich nur eins.",
+        "Such einen Song aus, den du früher richtig mochtest, und hör ihn einmal komplett.",
+        "Mach dir etwas Warmes zu trinken oder zu essen.",
+        "Räum genau fünf Dinge weg. Nicht mehr.",
+        "Mach ein Foto von dem Schönsten, das du gerade sehen kannst.",
+        "Wasch dein Gesicht oder deine Hände mit angenehm warmem Wasser.",
+        "Setz einen Timer auf zehn Minuten und mach in der Zeit nur etwas, das dir gerade guttut."
+      ]
+    };
+
+    let lastCategory = null;
+    let lastIndex = {};
+
+    function randomVideo() {
+      const video = videos[Math.floor(Math.random() * videos.length)];
+      window.open(video, "_blank");
+    }
+
+    
+    function pick(category){
+      lastCategory = category;
+      const items = content[category];
+
+      let index;
+      if(items.length === 1){
+        index = 0;
+      } else {
+        do {
+          index = Math.floor(Math.random() * items.length);
+        } while(index === lastIndex[category]);
+      }
+
+      lastIndex[category] = index;
+
+      const result = document.getElementById("result");
+      result.textContent = items[index];
+      result.classList.add("show");
+
+      document.getElementById("again").classList.add("show");
+
+      result.scrollIntoView({behavior:"smooth", block:"center"});
+    }
+  </script>
 </body>
 </html>
