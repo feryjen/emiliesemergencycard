@@ -6,14 +6,16 @@
   <meta name="theme-color" content="#f6f1eb" />
   <title>Emilie's Kleine Oppepper 🤍</title>
   <style>
-    :root{
-      --bg:#f6f1eb;
-      --card:#fffdf9;
-      --text:#2f2a27;
-      --muted:#746c66;
-      --border:#ded5cd;
-      --shadow:0 10px 30px rgba(47,42,39,.08);
-    }
+:root{
+  --bg:#d8ddca;          /* helles Moos */
+  --card:#f5f0e4;        /* warmes Pilz-Creme */
+  --text:#314333;        /* tiefes Waldgrün */
+  --muted:#69735e;       /* gedämpftes Moosgrün */
+  --border:#a7ad91;      /* Flechte */
+  --accent:#9b4938;      /* Fliegenpilz / Rostrot */
+  --button:#e7e2d3;      /* heller Waldboden */
+  --shadow:0 10px 30px rgba(49,67,51,.14);
+}
 
     *{box-sizing:border-box}
 
@@ -58,20 +60,25 @@
       gap:12px;
     }
 
-    button{
-      width:100%;
-      border:1px solid var(--border);
-      background:#fff;
-      color:var(--text);
-      border-radius:18px;
-      padding:16px 18px;
-      text-align:left;
-      font:inherit;
-      font-weight:700;
-      cursor:pointer;
-      transition:.15s ease;
-      box-shadow:0 4px 12px rgba(47,42,39,.04);
-    }
+button{
+  width:100%;
+  border:1px solid var(--border);
+  background:var(--button);
+  color:var(--text);
+  border-radius:18px;
+  padding:16px 18px;
+  text-align:left;
+  font:inherit;
+  font-weight:700;
+  cursor:pointer;
+  transition:.15s ease;
+  box-shadow:0 4px 12px rgba(49,67,51,.08);
+}
+
+button:hover{
+  border-color:var(--accent);
+  transform:translateY(-1px);
+}
 
     button:active{
       transform:scale(.985);
@@ -84,21 +91,21 @@
       box-shadow:none;
     }
 
-    .result{
-      margin-top:20px;
-      padding:22px 18px;
-      border:1px dashed var(--border);
-      border-radius:20px;
-      background:#fff;
-      min-height:150px;
-      display:none;
-      align-items:center;
-      justify-content:center;
-      text-align:center;
-      font-size:1.2rem;
-      line-height:1.55;
-      white-space:pre-line;
-    }
+.result{
+  margin-top:20px;
+  padding:22px 18px;
+  border:1px dashed var(--accent);
+  border-radius:20px;
+  background:var(--button);
+  min-height:150px;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  font-size:1.2rem;
+  line-height:1.55;
+  white-space:pre-line;
+}
 
     .result.show{
       display:flex;
