@@ -245,8 +245,23 @@ button:hover{
 }
 
 .g5{
-  right 5%;
+  right:5%;
   transform:rotate(10deg);
+}
+.grass-field{
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+}
+
+.grass-blade{
+  position:absolute;
+  bottom:8px;
+  width:2px;
+  background:#425137;
+  border-radius:100% 0;
+  transform-origin:bottom;
+  opacity:.9;
 }
     
   </style>
@@ -274,11 +289,7 @@ button:hover{
     </section>
   </main>
 <div class="forest-floor" aria-hidden="true">
-  <div class="grass g1"></div>
-  <div class="grass g2"></div>
-  <div class="grass g3"></div>
-  <div class="grass g4"></div>
-  <div class="grass g5"></div>  
+ <div class="grass-field" id="grassField"></div>
 
   <div class="mushroom mushroom-1">
     <div class="mushroom-cap"></div>
@@ -393,6 +404,39 @@ button:hover{
         "Mach ein Lied zum dazu Tanzen an und beweg dich für die Dauer des Songs ganz frei, so leicht oder wild du willst. Niemand guckt zu ;)",
         "Geh zum Kleiderschrank und such genau EIN Teil heraus, was du eigentlich gar nicht mehr anziehst. Bedank dich für seine Dienste und schmeiß es weg oder bring es in einen Altkleidercontainer."
       ]
+
+      const grassField = document.getElementById("grassField");
+
+const mushroomZones = [
+  { from: 4, to: 13 },
+  { from: 20, to: 31 },
+  { from: 72, to: 80 },
+  { from: 89, to: 98 }
+];
+
+function isMushroomZone(x){
+  return mushroomZones.some(zone => x >= zone.from && x <= zone.to);
+}
+
+for(let i = 0; i < 100; i++){
+  let x;
+
+  do {
+    x = Math.random() * 100;
+  } while(isMushroomZone(x));
+
+  const blade = document.createElement("div");
+  blade.className = "grass-blade";
+
+  const height = 10 + Math.random() * 28;
+  const rotation = -25 + Math.random() * 50;
+
+  blade.style.left = `${x}%`;
+  blade.style.height = `${height}px`;
+  blade.style.transform = `rotate(${rotation}deg)`;
+
+  grassField.appendChild(blade);
+}
     };
 
     let lastCategory = null;
