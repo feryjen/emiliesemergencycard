@@ -273,10 +273,11 @@ button:hover{
       <p class="intro">Was brauchst du gerade?</p>
 
       <div class="buttons">
-        <button onclick="pick('nett')">🤍 Ich brauche einen netten Satz</button>
-        <button onclick="randomVideo()">😂 Ich brauche einen Lacher</button>
+        <button onclick="pick('nett')">🤍 Ich brauche ein Kompliment</button>
+        <button onclick="randomVideo()">😂 Ich brauche was zum Lachen</button>
         <button onclick="pick('aufmunterung')">🌱 Ich brauche Aufmunterung</button>
         <button onclick="pick('aufgabe')">🎯 Ich brauche eine Aufgabe</button>
+		<button onclick="randomHasselhoff()">🔥 Ich will was Schönes sehen</button>
       </div>
 
       <div id="result" class="result" aria-live="polite"></div>
@@ -285,7 +286,7 @@ button:hover{
         <button class="secondary" onclick="pick(lastCategory)">Noch einen ✨</button>
       </div>
 
-      <div class="tiny">Du musst heute nicht alles schaffen.</div>
+      <div class="tiny">Du bist ein wunderschöner Mensch!</div>
     </section>
   </main>
 <div class="forest-floor" aria-hidden="true">
@@ -403,7 +404,27 @@ button:hover{
         "Nimm dir eine Decke und leg dich draußen unter einen Baum. Mach ein Foto von deinem Ausblick!",
         "Mach ein Lied zum dazu Tanzen an und beweg dich für die Dauer des Songs ganz frei, so leicht oder wild du willst. Niemand guckt zu ;)",
         "Geh zum Kleiderschrank und such genau EIN Teil heraus, was du eigentlich gar nicht mehr anziehst. Bedank dich für seine Dienste und schmeiß es weg oder bring es in einen Altkleidercontainer."
-      ]
+      ],
+	  
+	  hasselhoff: [
+	  "https://i.pinimg.com/736x/a0/da/c1/a0dac1c81ca3d604d411bf735612b967.jpg",
+	  "https://i.pinimg.com/originals/c1/d9/30/c1d9305a0b1483d64b5bc0c2a07d8f69.jpg",
+	  "https://hollywoodlife.com/wp-content/uploads/2022/07/David-Hasselhoff-Through-The-Years-ss-9.jpg",
+	  "https://i.ebayimg.com/images/g/eBoAAOSw2TthZ1cK/s-l1200.jpg",
+	  "https://people.com/thmb/gdjx04qt2Xh3E6F_XEe3EKB3rE4=/4000x0/filters:no_upscale():max_bytes(150000):strip_icc():focal(599x0:601x2)/David-Hasselhoff-4-071525-e26cb89573c94a0d882ab87e59138e3e.jpg",
+	  "https://people.com/thmb/7Yn2OKQ7UfGPJ618jyzTa3elFK8=/4000x0/filters:no_upscale():max_bytes(150000):strip_icc():focal(599x0:601x2)/David-Hasselhoff-3-071525-7b85697d32054f8281e0a6733ad01263.jpg",
+	  "https://i.pinimg.com/736x/b5/16/51/b51651e202455dda0cd47936e307f4f7.jpg",
+	  "https://cdn.prod.www.spiegel.de/images/30ab65d0-0001-0004-0000-000000029858_w520_r0.6606728538283063_fpx54.99_fpy29.72.jpg",
+	  "https://ih1.redbubble.net/image.5646584034.1534/fposter,small,wall_texture,square_product,600x600.u2.jpg",
+	  "https://i.pinimg.com/236x/15/ca/5b/15ca5b34bc65bd7658d9031a2282a2e0.jpg",
+	  "https://smago.de/ws2/wp-content/uploads/2018/04/n81171-profil.jpg",
+	  "https://cdn.prod.www.spiegel.de/images/f7d8ec5c-ad15-47c7-9ee9-e4fff8b9fbc9_w1200_r1_fpx45_fpy55.jpg",
+	  "https://i.redd.it/04wn6pk5h40c1.jpg",
+	  "https://people.com/thmb/gVjtaHFmIl1Xkf4b0_eb_u7wjjQ=/4000x0/filters:no_upscale():max_bytes(150000):strip_icc():focal(599x0:601x2)/David-Hasselhoff-5-071525-bbec62a813d24116b975a129ac6fb097.jpg",
+	  "https://i.redd.it/ej2nw7grf5791.jpg",
+	  "https://static.ksta.de/__images/2024/06/11/45316775-7051-4b7f-96dc-c21eb34b3eb5.jpeg?w=1200&h=900&ar=4:3&fit=crop&s=677c6778e16c1c4a94c2387bbf5ed832"
+	  
+	  ]
   
     };   
 
@@ -448,6 +469,11 @@ for(let i = 0; i < 100; i++){
       window.open(video, "_blank");
     }
 
+function randomHasselhoff() {
+  const links = content.hasselhoff;
+  const hasselhoff = links[Math.floor(Math.random() * links.length)];
+  window.open(hasselhoff, "_blank");
+}
     
     function pick(category){
       lastCategory = category;
